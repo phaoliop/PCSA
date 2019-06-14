@@ -15,7 +15,7 @@
 <body onload="TokenOrRedirect()">
     <header>
         <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
-            <a class="navbar-brand" href="#">
+            <a class="navbar-brand" href="index.html">
                 <img src="files/img/bootstrap-solid.svg" width="30" height="30" class="d-inline-block align-top" alt="">
                 PCSA
             </a>
@@ -26,23 +26,33 @@
             <div class="collapse navbar-collapse" id="navbarSupportedContent">
                 <ul class="navbar-nav mr-auto">
                     <li class="nav-item active">
-                        <a class="nav-link" href="#">Inicio <span class="sr-only">(current)</span></a>
+                        <a class="nav-link" href="index.html">Inicio <span class="sr-only">(current)</span></a>
+                    </li>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownClientes" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            Clientes
+                        </a>
+                        <div class="dropdown-menu" aria-labelledby="navbarDropdownClientes">
+                            <a class="dropdown-item" href="clientes-personas.html">Personas</a>
+                            <div class="dropdown-divider"></div>
+                            <a class="dropdown-item" href="clientes-empresas.html">Empresas</a>
+                        </div>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="#">Compras</a>
+                        <a class="nav-link" href="productos.html">Productos</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="#">Compras</a>
+                        <a class="nav-link" href="proveedores.html">Proveedores</a>
                     </li>
                     <li class="nav-item dropdown">
                         <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownConsultar" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                             Consultar
                         </a>
                         <div class="dropdown-menu" aria-labelledby="navbarDropdownConsultar">
-                            <a class="dropdown-item" href="#">Action</a>
-                            <a class="dropdown-item" href="#">Another action</a>
+                            <a class="dropdown-item" href="#">Producto</a>
+                            <a class="dropdown-item" href="#">Proveedor</a>
                             <div class="dropdown-divider"></div>
-                            <a class="dropdown-item" href="#">Something else here</a>
+                            <a class="dropdown-item" href="#">Otros</a>
                         </div>
                     </li>
                     <li class="nav-item dropdown">
@@ -50,10 +60,10 @@
                             Registrar
                         </a>
                         <div class="dropdown-menu" aria-labelledby="navbarDropdownRegistrar">
-                            <a class="dropdown-item" href="#">Action</a>
-                            <a class="dropdown-item" href="#">Another action</a>
+                            <a class="dropdown-item" href="#">Nueva compra al proveedor</a>
+                            <a class="dropdown-item" href="#">Nuevo pedido del cliente</a>
                             <div class="dropdown-divider"></div>
-                            <a class="dropdown-item" href="#">Something else here</a>
+                            <a class="dropdown-item" href="#">Otros</a>
                         </div>
                     </li>
                 </ul>

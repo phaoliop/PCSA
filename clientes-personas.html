@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <!-- My JS-->
+    <script src="js/pcsa.js"></script>
+
+    <title>Cliente Personas</title>
+</head>
+<body onload="listarClientes('usuariosindividual')">
+<header>
+    <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
+        <a class="navbar-brand" href="index.html">
+            <img src="files/img/bootstrap-solid.svg" width="30" height="30" class="d-inline-block align-top" alt="">
+            PCSA
+        </a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav mr-auto">
+                <li class="nav-item">
+                    <a class="nav-link" href="index.html">Inicio <span class="sr-only">(current)</span></a>
+                </li>
+                <li class="nav-item dropdown active">
+                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownClientes" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        Clientes
+                    </a>
+                    <div class="dropdown-menu active" aria-labelledby="navbarDropdownClientes">
+                        <a class="dropdown-item active" href="clientes-personas.html">Personas</a>
+                        <div class="dropdown-divider"></div>
+                        <a class="dropdown-item" href="clientes-empresas.html">Empresas</a>
+                    </div>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="productos.html">Productos</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="proveedores.html">Proveedores</a>
+                </li>
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownConsultar" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        Consultar
+                    </a>
+                    <div class="dropdown-menu" aria-labelledby="navbarDropdownConsultar">
+                        <a class="dropdown-item" href="#">Producto</a>
+                        <a class="dropdown-item" href="#">Proveedor</a>
+                        <div class="dropdown-divider"></div>
+                        <a class="dropdown-item" href="#">Otros</a>
+                    </div>
+                </li>
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownRegistrar" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        Registrar
+                    </a>
+                    <div class="dropdown-menu" aria-labelledby="navbarDropdownRegistrar">
+                        <a class="dropdown-item" href="#">Nueva compra al proveedor</a>
+                        <a class="dropdown-item" href="#">Nuevo pedido del cliente</a>
+                        <div class="dropdown-divider"></div>
+                        <a class="dropdown-item" href="#">Otros</a>
+                    </div>
+                </li>
+            </ul>
+            <button class="btn btn-info my-2 my-sm-0" onclick="cerrarSesion()">Cerrar Sesión</button>
+        </div>
+    </nav>
+</header>
+<div class="container-fluid">
+    <div class="container">
+        <!-- Content here -->
+        <table class="table" style="margin-top: 30px;">
+            <thead class="thead-dark">
+            <tr>
+                <th scope="col">#</th>
+                <th scope="col">Nombre</th>
+                <th scope="col">Correo</th>
+                <th scope="col">Celular</th>
+                <th scope="col">Estado</th>
+                <th scope="col">Activo</th>
+            </tr>
+            </thead>
+            <tbody id="tabla-lista-cliente-personas">
+            </tbody>
+        </table>
+
+        <!--ALERT-->
+        <br>
+        <div id="alert-msj" class="alert alert-warning alert-dismissible fade show container col-4" role="alert" style="display: none;">
+        </div>
+    </div>
+</div>
+
+<!-- Optional JavaScript -->
+<!-- jQuery first, then Popper.js, then Bootstrap JS -->
+<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+<script src="js/bootstrap.bundle.js" crossorigin="anonymous"></script>
+<script src="js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+
+</body>
+</html>
