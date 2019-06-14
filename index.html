@@ -7,10 +7,12 @@
 
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <!-- My JS-->
+    <script src="js/pcsa.js"></script>
 
     <title>Inicio</title>
 </head>
-<body>
+<body onload="TokenOrRedirect()">
     <header>
         <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
             <a class="navbar-brand" href="#">
@@ -55,11 +57,7 @@
                         </div>
                     </li>
                 </ul>
-                <form class="form-inline my-2 my-lg-0">
-                    <form class="form-inline my-2 my-lg-0">
-                        <button class="btn btn-info my-2 my-sm-0" type="submit">Cerrar Sesión</button>
-                    </form>
-                </form>
+                    <button class="btn btn-info my-2 my-sm-0" onclick="cerrarSesion()">Cerrar Sesión</button>
             </div>
         </nav>
     </header>

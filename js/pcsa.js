@@ -1,5 +1,21 @@
+var LOCAL_URL_LOGIN = "http://localhost:63342/WebPCSA/login.html";
+
+/*
+ * FUNCIONES PARA INDEX
+ */
+function TokenOrRedirect() {
+    var IdToken = window.sessionStorage.getItem("IdToken");
+    if (IdToken == null) {
+        alert("Debe iniciar sesión");
+        window.location.replace(LOCAL_URL_LOGIN);
+    } else {
+
+    }
+
+}
+
 /***
- FUNCIONES PARA LOGIN
+ *FUNCIONES PARA LOGIN
  ***/
 function requestLoginPersona() {
     var formLogin = document.getElementById("formLogin");
@@ -67,6 +83,14 @@ function mostrar(id){
 }
 function ocultar(id){
     document.getElementById(id).style.display = 'none';
+}
+
+/**
+ * SESION
+ */
+function  cerrarSesion() {
+    window.sessionStorage.setItem("IdToken", null);
+    window.location.replace(LOCAL_URL_LOGIN);
 }
 
 /**
