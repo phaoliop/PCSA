@@ -3,9 +3,75 @@ var LOCAL_URL_LOGIN = "login.html";
 
 // URL GLOBALES
 var URL_LOGIN = "https://km29vlujn4.execute-api.us-east-2.amazonaws.com/api/login";
+var URL_REGISTRAR = "https://km29vlujn4.execute-api.us-east-2.amazonaws.com/api/users/v0/clientes";
 var URL_LISTAR_PRODUCTOS = "https://km29vlujn4.execute-api.us-east-2.amazonaws.com/api/productos/v0";
 var URL_LISTAR_PROVEEDORES = "https://km29vlujn4.execute-api.us-east-2.amazonaws.com/api/proveedores/v0";
 var URL_LISTAR_CLIENTES = "https://km29vlujn4.execute-api.us-east-2.amazonaws.com/api/users/v0/clientes";
+
+var URL_COMPRAS_PROVEEDOR = "https://km29vlujn4.execute-api.us-east-2.amazonaws.com/api/compras/v0/proveedores";
+var URL_COMPRAS_CLIENTE = "https://km29vlujn4.execute-api.us-east-2.amazonaws.com/api/productos/v0/cliente";
+var URL_PROVEEDORES = "https://km29vlujn4.execute-api.us-east-2.amazonaws.com/api/proveedores/v0";
+var URL_PRODUCTOS = "https://km29vlujn4.execute-api.us-east-2.amazonaws.com/api/productos/v0";
+
+/*
+ * FUNCIONES PARA COMPRAS
+ */
+
+function requestRegistrarComprasProveedor() {
+    var formRegistrar = document.getElementById("formRegistrar");
+    if (formRegistrar.checkValidity()) {
+        registrarComprasProveedor();
+    } else {
+        change_alert("alert-msj",
+            "alert alert-warning alert-dismissible fade show container col-4",
+            "<strong>Faltan completar los campos obligatorios!</strong><br>");
+    }
+}
+
+function registrarComprasProveedor() {
+    const xhr = new XMLHttpRequest();
+    xhr.open('POST', URL_COMPRAS_PROVEEDOR);
+    xhr.onreadystatechange = (evt) => {
+        if (xhr.readyState === 4 && xhr.status === 200) {
+            const response = JSON.parse(xhr.responseText);
+            if (response.response=='ok') {
+                window.location.replace("index.html");
+            } else {
+                change_alert("alert-msj",
+                    "alert alert-danger alert-dismissible fade show container col-4",
+                    "<strong>Ha ocurrido un error!</strong><br>Datos inválidos!!");
+            }
+
+        }
+    };
+    xhr.onerror = (evt) => {
+        change_alert("alert-msj",
+            "alert alert-dark alert-dismissible fade show container col-4",
+            "<strong>Ha ocurrido al intentar registrar</strong><br>Por favor intente nuevamente.");
+    };
+    var dataForm = {};
+    $($("#formRegistrar").serializeArray()).each(function(i, field){
+        dataForm[field.name] = field.value;
+    });
+    var params = {
+        data: {
+            num_factura: dataForm['num_factura'].toString(),
+            proveedor: dataForm['proveedor'].toString(),
+            fecha: dataForm['fecha'].toString(),
+            lista_productos: [
+                {
+                    codigo: dataForm['codigo'].toString(),
+                    precio_compra: dataForm['precio_compra'].toString(),
+                    cantidad: dataForm['cantidad'].toString()
+                }
+            ]
+        }
+    };
+    console.info(params);
+    xhr.setRequestHeader('Content-type', 'application/json');
+    xhr.setRequestHeader('TokenId', window.sessionStorage.getItem('IdToken'));
+    xhr.send(JSON.stringify(params));
+}
 
 /*
  * FUNCIONES PARA PRODUCTOS
@@ -68,11 +134,106 @@ function listarProductos() {
     xhr.send();
 }
 
+function requestRegistrarProducto() {
+    var formRegistrar = document.getElementById("formRegistrar");
+    if (formRegistrar.checkValidity()) {
+        registrarProducto();
+    } else {
+        change_alert("alert-msj",
+            "alert alert-warning alert-dismissible fade show container col-4",
+            "<strong>Faltan completar los campos obligatorios!</strong><br>");
+    }
+}
+
+function registrarProducto() {
+    const xhr = new XMLHttpRequest();
+    xhr.open('POST', URL_PRODUCTOS);
+    xhr.onreadystatechange = (evt) => {
+        if (xhr.readyState === 4 && xhr.status === 200) {
+            const response = JSON.parse(xhr.responseText);
+            if (response.data=='ok') {
+                window.location.replace("productos.html");
+            } else {
+                change_alert("alert-msj",
+                    "alert alert-danger alert-dismissible fade show container col-4",
+                    "<strong>Ha ocurrido un error!</strong><br>Datos inválidos!!");
+            }
+
+        }
+    };
+    xhr.onerror = (evt) => {
+        change_alert("alert-msj",
+            "alert alert-dark alert-dismissible fade show container col-4",
+            "<strong>Ha ocurrido al intentar registrar</strong><br>Por favor intente nuevamente.");
+    };
+    var dataForm = {};
+    $($("#formRegistrar").serializeArray()).each(function(i, field){
+        dataForm[field.name] = field.value;
+    });
+    var params = {
+        data: {
+            codigo: dataForm['codigo'].toString(),
+            descripcion: dataForm['descripcion'].toString(),
+            foto: "#",
+            marca: dataForm['marca'].toString(),
+            proveedor: dataForm['proveedor'].toString(),
+            categoria: dataForm['categoria'].toString(),
+            nombre: dataForm['nombre'].toString(),
+            cantidad: dataForm['cantidad'].toString(),
+            precio_compra: dataForm['precio_compra'].toString()
+        }
+    };
+    console.info(params);
+    xhr.setRequestHeader('Content-type', 'application/json');
+    xhr.setRequestHeader('TokenId', window.sessionStorage.getItem('IdToken'));
+    xhr.send(JSON.stringify(params));
+}
+
+
 /*
  * FUNCIONES PARA PROVEEDORES
  */
+ 
+ function cargarListaProveedores(response) {
+    if (response.response == "ok") {
+		var data = response.data;
+		var selectlist = document.getElementById("proveedor");
+		
+		//Recorrer lista de productos
+		var lista_registros = data.proveedores;
+		for (pos in lista_registros){
+			var registro = lista_registros[pos];
+			console.log(registro);
+			selectlist.innerHTML += "<option value='"+ registro.RUC +"'>"+ registro.nombre +"</option>";
+		}
+	}
+ }
+ 
+ function consultarProveedores(filtro) {
+	if (filtro != undefined) {
+		filtro = "?filter=" + filtro;
+	} else {
+		filtro = "";
+	}
+ 
+	const xhr = new XMLHttpRequest();
+    xhr.open('GET', URL_LISTAR_PROVEEDORES + filtro);
+    xhr.onreadystatechange = (evt) => {
+        if (xhr.readyState === 4 && xhr.status === 200) {
+            const response = JSON.parse(xhr.responseText);
+			cargarListaProveedores(response);
+        }
+    };
+    xhr.onerror = (evt) => {
+        console.log(evt);
+    };
+    xhr.setRequestHeader('Content-type', 'application/json');
+    xhr.setRequestHeader('TokenId', window.sessionStorage.getItem('IdToken'));
+    xhr.send();
+ }
 
 function listarProveedores() {
+
     const xhr = new XMLHttpRequest();
     xhr.open('GET', URL_LISTAR_PROVEEDORES);
     xhr.onreadystatechange = (evt) => {
@@ -128,6 +289,57 @@ function listarProveedores() {
     xhr.setRequestHeader('Content-type', 'application/json');
     xhr.setRequestHeader('TokenId', window.sessionStorage.getItem('IdToken'));
     xhr.send();
+}
+
+function requestRegistrarProveedor() {
+    var formRegistrar = document.getElementById("formRegistrar");
+    if (formRegistrar.checkValidity()) {
+        registrarProveedor();
+    } else {
+        change_alert("alert-msj",
+            "alert alert-warning alert-dismissible fade show container col-4",
+            "<strong>Faltan completar los campos obligatorios!</strong><br>");
+    }
+}
+
+function registrarProveedor() {
+    const xhr = new XMLHttpRequest();
+    xhr.open('POST', URL_PROVEEDORES);
+    xhr.onreadystatechange = (evt) => {
+        if (xhr.readyState === 4 && xhr.status === 200) {
+            const response = JSON.parse(xhr.responseText);
+            if (response.data=='ok') {
+                window.location.replace("proveedores.html");
+            } else {
+                change_alert("alert-msj",
+                    "alert alert-danger alert-dismissible fade show container col-4",
+                    "<strong>Ha ocurrido un error!</strong><br>Datos inválidos!!");
+            }
+
+        }
+    };
+    xhr.onerror = (evt) => {
+        change_alert("alert-msj",
+            "alert alert-dark alert-dismissible fade show container col-4",
+            "<strong>Ha ocurrido al intentar registrar</strong><br>Por favor intente nuevamente.");
+    };
+    var dataForm = {};
+    $($("#formRegistrar").serializeArray()).each(function(i, field){
+        dataForm[field.name] = field.value;
+    });
+    var params = {
+        data: {
+            RUC: dataForm['RUC'].toString(),
+            correo: dataForm['correo'].toString(),
+            direccion: dataForm['direccion'].toString(),
+            nombre:dataForm['nombre'].toString(),
+            celular: dataForm['celular'].toString(),
+        }
+    };
+    console.info(params);
+    xhr.setRequestHeader('Content-type', 'application/json');
+    xhr.setRequestHeader('TokenId', window.sessionStorage.getItem('IdToken'));
+    xhr.send(JSON.stringify(params));
 }
 
 /*
@@ -206,9 +418,10 @@ function listarClientes(tipo_cliente) {
  */
 function TokenOrRedirect() {
     var IdToken = window.sessionStorage.getItem("IdToken");
-    if (IdToken == null) {
-        alert("Debe iniciar sesión");
+    if (IdToken == null) { 
         window.location.replace(LOCAL_URL_LOGIN);
+        alert("Debe iniciar sesión");
+       
     } else {
         //Actualizar token de ser necesario
     }
@@ -217,6 +430,7 @@ function TokenOrRedirect() {
 /***
  *FUNCIONES PARA LOGIN
  ***/
+
 function requestLoginPersona() {
     var formLogin = document.getElementById("formLogin");
     if (formLogin.checkValidity()) {
@@ -237,7 +451,7 @@ function login() {
             if (response.AuthenticationResult) {
                 var AuthenticationResult = response.AuthenticationResult;
                 window.sessionStorage.setItem("IdToken",AuthenticationResult.IdToken);
-                window.location.replace("http://localhost:63342/WebPCSA/index.html");
+                window.location.replace("index.html");
             } else {
                 change_alert("alert-msj",
                     "alert alert-danger alert-dismissible fade show container col-4",
@@ -259,6 +473,61 @@ function login() {
         data: {
             username: dataForm['username'].toString(),
             password: dataForm['password'].toString()
+        }
+    };
+    xhr.setRequestHeader('Content-type', 'application/json');
+    xhr.send(JSON.stringify(params));
+}
+
+/***
+ *FUNCIONES PARA REGISTRO
+ ***/
+
+function requestRegistrarPersona() {
+    var formRegistrar = document.getElementById("formRegistrar");
+    if (formRegistrar.checkValidity()) {
+        registrar();
+    } else {
+        change_alert("alert-msj",
+            "alert alert-warning alert-dismissible fade show container col-4",
+            "<strong>Faltan completar los campos!</strong><br>DNI / Constraseña son obligatorios.");
+    }
+}
+
+function registrar() {
+    const xhr = new XMLHttpRequest();
+    xhr.open('POST', URL_REGISTRAR);
+    xhr.onreadystatechange = (evt) => {
+        if (xhr.readyState === 4 && xhr.status === 200) {
+            const response = JSON.parse(xhr.responseText);
+            if (response.data=='ok') {
+                window.location.replace("login.html");
+            } else {
+                change_alert("alert-msj",
+                    "alert alert-danger alert-dismissible fade show container col-4",
+                    "<strong>Ha ocurrido un error!</strong><br>Datos inválidos!!");
+            }
+
+        }
+    };
+    xhr.onerror = (evt) => {
+        change_alert("alert-msj",
+            "alert alert-dark alert-dismissible fade show container col-4",
+            "<strong>Ha ocurrido al intentar registrarse</strong><br>Por favor intente nuevamente.");
+    };
+    var dataForm = {};
+    $($("#formRegistrar").serializeArray()).each(function(i, field){
+        dataForm[field.name] = field.value;
+    });
+    var params = {
+        data: {
+            username: dataForm['username'].toString(),
+            password: dataForm['password'].toString(),
+            direccion: dataForm['direccion'].toString(),
+            correo:dataForm['correo'].toString(),
+            apellidos: dataForm['apellidos'].toString(),
+            nombre: dataForm['nombre'].toString(),
+            celular: dataForm['celular'].toString()
         }
     };
     xhr.setRequestHeader('Content-type', 'application/json');
@@ -288,8 +557,8 @@ function ocultar(id){
 /**
  * SESION
  */
-function  cerrarSesion() {
-    window.sessionStorage.setItem("IdToken", null);
+function cerrarSesion() {
+    window.sessionStorage.clear();
     window.location.replace(LOCAL_URL_LOGIN);
 }
 

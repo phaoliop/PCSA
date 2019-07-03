@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="en">
 <head>
     <!-- Required meta tags -->
@@ -6,11 +6,22 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
     <!-- Bootstrap CSS -->
-    <link rel="stylesheet" href="css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <link rel="stylesheet" href="css/bootstrap.min.css"  >
     <!-- My JS-->
     <script src="js/pcsa.js"></script>
 
     <title>Inicio</title>
+
+    <style>
+    body{
+            /* Ubicación de la imagen */
+            background: url(files/img/6648.jpg);
+            background-position: center center;
+            background-repeat: no-repeat;
+            background-attachment: fixed;
+            background-size: cover;
+    }
+    </style>
 </head>
 <body onload="TokenOrRedirect()">
     <header>
@@ -60,8 +71,10 @@
                             Registrar
                         </a>
                         <div class="dropdown-menu" aria-labelledby="navbarDropdownRegistrar">
-                            <a class="dropdown-item" href="#">Nueva compra al proveedor</a>
-                            <a class="dropdown-item" href="#">Nuevo pedido del cliente</a>
+                            <a class="dropdown-item" href="compras-proveedor.html">Nueva compra al proveedor</a>
+                            <a class="dropdown-item" href="compras-cliente.html">Nuevo pedido del cliente</a>
+                            <a class="dropdown-item" href="registrarProducto.html">Nuevo Producto</a>
+                            <a class="dropdown-item" href="registrarProveedor.html">Nuevo Proveedor</a>
                             <div class="dropdown-divider"></div>
                             <a class="dropdown-item" href="#">Otros</a>
                         </div>
@@ -71,18 +84,75 @@
             </div>
         </nav>
     </header>
-    <div class="container-fluid">
-        <div class="container">
-            <!-- Content here -->
+    
+        <div class="jumbotron">
+                <div class="container">
 
+                    <div class="row ">
+                            <span class=" border border-10 border-primary">
+                                    <img class="rounded" src="files/img/logo.png" width="350" height="80" alt="" >
+                                </span>
+                                
+                        <div class="col-8 ">
+                            
+                            <p>Especialista en instrumentación y control de procesos industriales
+                            que cuenta con alianzas con diversas marcas de ren con el objetivo de poder ofrecer soluciones integrales en Automatización y 
+                            Control de Procesos. Asimismo, ofrecen servicios post-venta de los equipos
+                            que suministran.ombre internacional, 
+                           </p>
+                        <!-- Content here -->
+                        </div>
+                       
+                    </div>
+                </div>
         </div>
-    </div>
+        <div class="container">
+            <div class="row">
+                <div class="col-10">
+                    <div class="row">
+                        <div class="col-lg-4">
+                                <h3 class="text-white">Mision</h3>
+                                <p>Satisfacer los requerimientos de nuestros clientes y distribuidores brindando productos y servicios
+                                     de óptima calidad y tecnología, dar una adecuada rentabilidad a nuestros accionistas, promover 
+                                    el desarrollo integral de nuestros colaboradores y así lograr la mejora continua de la industria 
+                                    en el Perú.	</p>
+                                    <button class="btn btn-primary">Ver mas</button>
+                        </div>
+                    <div class="col-lg-4">
+                            <h3 class="text-white">Vision</h3>
+                            <p >Ser una empresa líder en Automatización y Control de Procesos Industriales, reconocidos por nuestros
+                                clientes y representados a nivel nacional e internacional por ofrecer y brindar las mejores soluciones
+                                técnico-económicas, así como ser ejemplo de gestión empresarial por la calidad del servicio ofrecido y 
+                                de los equipos e instrumentos suministrados.</p>
+                                <button class="btn btn-primary">Ver mas</button>
+                    </div>
+                    <div class="col-lg-4">
+                            <h3 class="text-white">Mi titulo</h3>
+                            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Totam quos aut hic ea 
+                                tempore exercitationem animi minus quaerat,</p>
+                                <button class="btn btn-primary">Ver mas</button>
+                    </div>
+                    </div>
+                </div>
+                <div class="col-2">
+                    <ul class="nav nav-stacked nav-pills">
+                        <li><a href="#">Contactanos</a></li>
+                        <li><a href="#">Redes Sociales</a></li>
+                        <li><a href="#">Mensajes</a></li>
+                    </ul>
+                </div>
+               
+            </div>
+        </div>
+        
+       
+    
 
     <!-- Optional JavaScript -->
     <!-- jQuery first, then Popper.js, then Bootstrap JS -->
-    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
-    <script src="js/bootstrap.bundle.js" crossorigin="anonymous"></script>
-    <script src="js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" ></script>
+    <script src="js/bootstrap.bundle.js" ></script>
+    <script src="js/bootstrap.min.js" ></script>
 
 </body>
 </html>
